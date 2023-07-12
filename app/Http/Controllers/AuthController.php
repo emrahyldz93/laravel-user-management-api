@@ -10,17 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
-use App\Adapters\EmailAdapter;
+use App\Adapters\UserManagementInterface;
 
 
 class AuthController extends Controller
 {
 
-    private $emailAdapter;
-
-    public function __construct(EmailAdapter $emailAdapter)
+    public function __construct(UserManagementInterface $userAdapter)
     {
-        $this->emailAdapter = $emailAdapter;
+        $this->userAdapter = $userAdapter;
+    }
+    public function createUser(Request $request)
+    {
+        // Handle the create user request using the UserAdapter
+        $response = $this->userAdapter->createUser($request);
+
+        // Return the response
+        return response()->json($response, $response['status']);
     }
     public function login(Request $request)
     {

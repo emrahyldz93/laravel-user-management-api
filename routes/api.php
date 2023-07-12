@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:100,1');
-Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:100,1');
+Route::post('/register', [AuthController::class, 'createUser'])->middleware('throttle:100,1');
